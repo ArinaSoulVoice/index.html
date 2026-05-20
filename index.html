@@ -108,7 +108,11 @@ nav.solid{
   z-index:2;
   opacity:0;animation:fi 1.8s .4s forwards;
 }
-.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.78)}
+.hero-img img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  filter:saturate(.78) brightness(.92);
+}
 /* placeholder */
 .hero-img-ph{
   width:100%;height:100%;position:relative;overflow:hidden;
@@ -802,13 +806,8 @@ footer{
   <div class="hero-grain"></div>
 
   <div class="hero-img">
-    <div class="hero-img-ph">
-      <div class="hero-img-ph-base"></div>
-      <div class="hero-img-ph-glow"></div>
-      <div class="hero-img-ph-grain"></div>
-      <div class="hero-img-fade"></div>
-      <span class="hero-img-ph-lbl">Фото Арины</span>
-    </div>
+    <img src="hero.jpg" alt="Арина Тупикова — Soul Voice">
+    <div class="hero-img-fade"></div>
   </div>
 
   <div class="hero-text">
