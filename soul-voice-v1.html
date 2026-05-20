@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul Voice · Арина Тупикова</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --paper:   #f7f3ef;
+  --paper2:  #f0ebe5;
+  --rose:    #b87d74;
+  --rose-lt: #d4a89f;
+  --rose-dk: #8a5a53;
+  --blush:   #ead7d2;
+  --ink:     #1e1916;
+  --ink2:    rgba(30,25,22,.6);
+  --ink3:    rgba(30,25,22,.35);
+  --line:    rgba(30,25,22,.09);
+  --serif:   'Fraunces', Georgia, serif;
+  --sans:    'DM Sans', system-ui, sans-serif;
+  --ease:    cubic-bezier(.77,0,.18,1);
+}
+
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+
+/* Fraunces optical size — more drama at large sizes */
+.hero-h1,.about-quote,.approach-intro,.contact-h,.testi-text{font-variation-settings:'opsz' 144}
+.strip-title,.fcard h3,.astep h3{font-variation-settings:'opsz' 72}
+
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px;opacity:.03;mix-blend-mode:multiply;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;padding:1.8rem 3.5rem;
+  transition:padding .4s,background .5s;
+}
+nav.solid{
+  background:rgba(247,243,239,.93);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:1.1rem 3.5rem;
+  box-shadow:0 1px 0 var(--line);
+}
+.nav-left{display:flex;flex-direction:column;gap:.2rem}
+.nav-city{font-family:var(--sans);font-size:.65rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}
+.nav-clock{font-family:var(--sans);font-size:.75rem;color:var(--ink3);letter-spacing:.1em}
+.nav-logo{
+  font-family:var(--sans);font-size:.72rem;font-weight:300;
+  letter-spacing:.32em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;text-align:center;transition:color .3s;
+}
+.nav-logo:hover{color:var(--rose)}
+.nav-right{display:flex;justify-content:flex-end;align-items:center;gap:2.5rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-family:var(--sans);font-size:.65rem;font-weight:300;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink3);text-decoration:none;transition:color .3s;
+}
+.nav-links a:hover{color:var(--rose)}
+.burger{display:none;flex-direction:column;gap:6px;padding:4px;background:none;border:none;cursor:pointer}
+.burger span{display:block;width:22px;height:1px;background:var(--ink3)}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;overflow:hidden;
+  background:var(--paper);
+}
+.hero-glow-a{position:absolute;top:-12%;right:-6%;width:62%;height:74%;background:radial-gradient(ellipse at 55% 35%,rgba(184,125,116,.13) 0%,rgba(184,125,116,.04) 44%,transparent 68%);filter:blur(72px);pointer-events:none}
+.hero-glow-b{position:absolute;bottom:-18%;left:-4%;width:52%;height:60%;background:radial-gradient(ellipse at 40% 65%,rgba(184,125,116,.06) 0%,transparent 62%);filter:blur(90px);pointer-events:none}
+.hero-grain{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:200px;opacity:.034;mix-blend-mode:multiply}
+.hero-tags{position:absolute;top:7rem;right:3.5rem;display:flex;flex-direction:column;align-items:flex-end;gap:.25rem;z-index:3;opacity:0;animation:fi .9s .4s forwards}
+.hero-tags span{font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}
+.hero-tags span::after{content:' /'}
+
+.hero-photo{position:absolute;right:7vw;top:50%;transform:translateY(-52%);width:min(220px,21vw);aspect-ratio:2/3;overflow:hidden;z-index:2;opacity:0;animation:fi 1.6s .8s forwards}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.ph{position:absolute;inset:0}
+.ph-base{position:absolute;inset:0;background:linear-gradient(165deg,rgba(184,125,116,.3) 0%,rgba(148,95,86,.2) 50%,rgba(110,70,65,.25) 100%)}
+.ph-light{position:absolute;top:-15%;right:-15%;width:80%;height:70%;background:radial-gradient(ellipse,rgba(220,175,155,.32) 0%,transparent 62%);filter:blur(26px)}
+.ph-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px;opacity:.17;mix-blend-mode:multiply}
+.ph-fade{position:absolute;inset:0;background:linear-gradient(to right,var(--paper) 0%,transparent 15%,transparent 85%,var(--paper) 100%),linear-gradient(to bottom,var(--paper) 0%,transparent 12%,transparent 88%,var(--paper) 100%)}
+.ph-label{position:absolute;bottom:1rem;left:1rem;font-family:var(--sans);font-size:.58rem;letter-spacing:.13em;color:rgba(184,125,116,.45)}
+
+.hero-center{flex:1;display:flex;align-items:flex-end;padding:0 3.5rem 5rem;position:relative;z-index:3}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(3rem,5vw,5.8rem);
+  font-weight:400;font-style:italic;
+  line-height:1.1;color:var(--ink);max-width:60vw;
+  opacity:0;transform:translateY(22px);animation:fu 1.2s .5s forwards;
+}
+.hero-h1 em{font-style:normal;color:var(--rose)}
+
+.hero-bar{
+  position:relative;z-index:3;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 3.5rem;border-top:1px solid var(--line);
+  opacity:0;animation:fi .8s 1s forwards;
+}
+.hero-bar-stats{display:flex;gap:3.5rem}
+.hstat p{font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:.2rem}
+.hstat strong{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--rose);line-height:1}
+.hero-scroll{display:flex;align-items:center;gap:.7rem}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--rose-lt),transparent);animation:pulse-line 2.8s ease-in-out infinite}
+.hero-scroll-txt{font-family:var(--sans);font-size:.58rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);writing-mode:vertical-rl}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap{overflow:hidden;background:var(--paper2);padding:1.2rem 0}
+.marquee-inner{display:flex;white-space:nowrap;animation:marquee 32s linear infinite}
+.marquee-inner span{font-family:var(--sans);font-size:.64rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);padding:0 2rem;flex-shrink:0}
+.marquee-inner span::before{content:'◦';margin-right:2rem;color:var(--rose-lt)}
+
+/* ─── SECTIONS ─── */
+.sec{padding:7rem 3.5rem;position:relative}
+.sec--alt{background:var(--paper2)}
+.sec--dark{background:var(--ink)}
+
+.lbl{
+  font-family:var(--sans);font-size:.65rem;font-weight:300;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--rose);
+  display:flex;align-items:center;gap:.85rem;margin-bottom:2rem;
+}
+.lbl::before{content:'';width:16px;height:1px;background:var(--rose);flex-shrink:0}
+.lbl-lt{color:rgba(247,243,239,.4)}
+.lbl-lt::before{background:rgba(247,243,239,.3)}
+
+/* ─── ABOUT ─── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr}
+.about-l{padding:0 4rem 0 0;border-right:1px solid var(--line)}
+.about-r{padding:0 0 0 4rem;display:flex;flex-direction:column;justify-content:space-between}
+.about-quote{
+  font-family:var(--serif);font-size:clamp(1.7rem,2.2vw,2.5rem);
+  font-weight:400;font-style:italic;line-height:1.4;
+  color:var(--ink);margin-bottom:2.2rem;
+}
+.about-quote em{font-style:normal;color:var(--rose)}
+.about-p{font-family:var(--serif);font-size:1.1rem;font-weight:400;line-height:1.85;color:var(--ink2);margin-bottom:1rem}
+
+.about-img{aspect-ratio:3/4;overflow:hidden;margin-bottom:2rem;position:relative}
+.about-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.aph{position:absolute;inset:0}
+.aph-base{position:absolute;inset:0;background:linear-gradient(158deg,rgba(184,125,116,.3) 0%,rgba(140,90,82,.2) 48%,rgba(95,60,55,.26) 100%)}
+.aph-light{position:absolute;top:-20%;right:-20%;width:85%;height:75%;background:radial-gradient(ellipse,rgba(220,175,155,.33) 0%,transparent 58%);filter:blur(30px)}
+.aph-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.48' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:175px;opacity:.15;mix-blend-mode:multiply}
+.aph-lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.02) 3px,rgba(0,0,0,.02) 4px)}
+.aph-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 70%,var(--paper2) 100%)}
+.aph-label{position:absolute;bottom:1rem;left:1rem;font-family:var(--sans);font-size:.58rem;letter-spacing:.13em;color:rgba(184,125,116,.45)}
+
+.about-meta{display:flex;gap:2.5rem;padding-top:1.8rem;border-top:1px solid var(--line)}
+.meta-item p{font-family:var(--sans);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:.3rem}
+.meta-item strong{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--rose)}
+
+/* ─── STRIPS — accordion ─── */
+.strips{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+.strip{
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+  transition:background .4s var(--ease);
+  cursor:pointer;
+}
+.strip:last-child{border-bottom:none}
+.strip.open{background:var(--paper2)}
+
+.strip-head{
+  display:grid;grid-template-columns:4rem 1fr 2rem;
+  align-items:center;gap:2.5rem;
+  padding:2.2rem 3.5rem;
+  user-select:none;
+}
+.strip-n{
+  font-family:var(--sans);font-size:1.6rem;font-weight:200;
+  color:rgba(30,25,22,.1);letter-spacing:-.01em;
+  transition:color .4s;
+}
+.strip.open .strip-n{color:var(--rose-lt)}
+.strip-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:.25rem}
+.strip-sub{font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3)}
+.strip-icon{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:var(--rose-lt);
+  transition:transform .4s var(--ease),border-color .3s,color .3s;
+  flex-shrink:0;
+}
+.strip.open .strip-icon{transform:rotate(45deg);border-color:var(--rose-lt);color:var(--rose)}
+
+/* accordion body */
+.strip-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s var(--ease),opacity .4s;
+  opacity:0;
+}
+.strip.open .strip-body{max-height:300px;opacity:1}
+.strip-body-inner{
+  padding:0 3.5rem 2.5rem calc(3.5rem + 4rem + 2.5rem);
+  font-family:var(--serif);font-size:1.05rem;font-weight:400;
+  line-height:1.85;color:var(--ink2);
+  max-width:600px;
+}
+
+/* ─── APPROACH ─── */
+.approach-inner{max-width:640px;margin:0 auto}
+.approach-intro{
+  font-family:var(--serif);font-size:clamp(1.8rem,2.5vw,2.8rem);
+  font-weight:400;font-style:italic;line-height:1.35;
+  color:var(--paper);margin-bottom:4rem;
+}
+.approach-intro em{font-style:normal;color:var(--rose-lt)}
+
+.asteps{display:flex;flex-direction:column}
+.astep{
+  display:grid;grid-template-columns:4rem 1fr;gap:2rem;
+  padding:2.5rem 0;border-bottom:1px solid rgba(247,243,239,.07);
+  opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s;
+}
+.astep.in{opacity:1;transform:none}
+.astep:first-child{border-top:1px solid rgba(247,243,239,.07)}
+.astep-n{font-family:var(--sans);font-size:1.9rem;font-weight:200;color:rgba(247,243,239,.08);line-height:1;padding-top:.3rem;letter-spacing:-.01em}
+.astep h3{font-family:var(--serif);font-size:1.25rem;font-weight:400;color:var(--paper);margin-bottom:.55rem}
+.astep p{font-family:var(--serif);font-size:1.05rem;font-weight:400;line-height:1.78;color:rgba(247,243,239,.62)}
+
+/* ─── FORMAT ─── */
+.format-cols{display:grid;grid-template-columns:1fr 1fr;margin-top:2.5rem}
+.fcard{
+  padding:3rem;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .6s,transform .6s;
+}
+.fcard.in{opacity:1;transform:none}
+.fcard:first-child{border-right:1px solid var(--line);padding-right:4rem}
+.fcard:last-child{padding-left:4rem}
+.fcard-grain{position:absolute;top:0;right:0;width:55%;height:50%;pointer-events:none}
+.fcard-grain-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 65% 25%,rgba(184,125,116,.07) 0%,transparent 58%)}
+.fcard-grain-tex{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:130px;opacity:.04;mix-blend-mode:multiply}
+.ftag{font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:1.8rem;position:relative;z-index:1}
+.fcard h3{font-family:var(--serif);font-size:1.9rem;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:.9rem;position:relative;z-index:1}
+.fcard p{font-family:var(--serif);font-size:1.05rem;font-weight:400;line-height:1.82;color:var(--ink2);margin-bottom:1.6rem;position:relative;z-index:1}
+.flist{list-style:none;display:flex;flex-direction:column;gap:.55rem;position:relative;z-index:1}
+.flist li{font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:.75rem}
+.flist li::before{content:'—';color:var(--rose-lt);flex-shrink:0}
+
+/* ─── TESTIMONIAL ─── */
+.testi-wrap{position:relative;overflow:hidden;background:var(--blush);padding:7rem 3.5rem}
+.testi-grain{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.58' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:180px;opacity:.052;mix-blend-mode:multiply}
+.testi-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58%;height:100%;background:radial-gradient(ellipse,rgba(184,125,116,.14) 0%,transparent 62%);filter:blur(52px);pointer-events:none}
+.testi-inner{max-width:580px;margin:0 auto;text-align:center;position:relative;z-index:1;opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s}
+.testi-inner.in{opacity:1;transform:none}
+.testi-wave{display:flex;justify-content:center;gap:3px;margin-bottom:2.2rem}
+.testi-wave span{height:2px;border-radius:1px;background:var(--rose)}
+.testi-wave span:nth-child(1){width:11px;opacity:.44}
+.testi-wave span:nth-child(2){width:21px;opacity:.82}
+.testi-wave span:nth-child(3){width:8px;opacity:.36}
+.testi-wave span:nth-child(4){width:15px;opacity:.66}
+.testi-wave span:nth-child(5){width:10px;opacity:.3}
+.testi-lbl{font-family:var(--sans);font-size:.65rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--rose-dk);margin-bottom:1.6rem}
+.testi-text{font-family:var(--serif);font-size:clamp(1.4rem,2vw,2rem);font-weight:400;font-style:italic;line-height:1.55;color:var(--ink)}
+
+/* ─── CONTACT ─── */
+.contact-cols{display:grid;grid-template-columns:1fr 1fr;position:relative}
+.contact-glow-bg{position:absolute;bottom:-25%;right:-8%;width:60%;height:75%;background:radial-gradient(ellipse at 65% 70%,rgba(184,125,116,.09) 0%,transparent 62%);filter:blur(62px);pointer-events:none}
+.contact-grain-tex{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px;opacity:.025;mix-blend-mode:multiply}
+.contact-l{padding:0 4rem 0 0;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
+.contact-r{padding:0 0 0 4rem;position:relative;z-index:1}
+.contact-h{font-family:var(--serif);font-size:clamp(2rem,3vw,3.6rem);font-weight:400;font-style:italic;line-height:1.15;color:var(--ink);margin-bottom:1.3rem}
+.contact-h em{font-style:normal;color:var(--rose)}
+.contact-desc{font-family:var(--serif);font-size:1.05rem;font-weight:400;line-height:1.85;color:var(--ink2);margin-bottom:2.8rem;max-width:25rem}
+.channels{display:flex;flex-direction:column}
+.chan{display:flex;align-items:center;gap:1rem;text-decoration:none;padding:.9rem 0;border-bottom:1px solid var(--line);transition:border-color .35s}
+.chan:first-child{border-top:1px solid var(--line)}
+.chan:hover{border-bottom-color:var(--rose-lt)}
+.chan-dot{width:36px;height:36px;border-radius:50%;border:1px solid rgba(30,25,22,.12);display:flex;align-items:center;justify-content:center;color:var(--rose);flex-shrink:0;transition:border-color .3s,background .3s}
+.chan-dot svg{width:15px;height:15px;flex-shrink:0}
+.chan:hover .chan-dot{background:var(--blush);border-color:var(--rose-lt)}
+.chan-label{font-family:var(--sans);font-size:.64rem;font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);transition:color .3s}
+.chan:hover .chan-label{color:var(--rose)}
+
+.ff{margin-bottom:1.8rem}
+.ff label{display:block;font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:.65rem}
+.ff input,.ff select{
+  width:100%;background:transparent;border:none;
+  border-bottom:1px solid rgba(30,25,22,.12);
+  padding:.7rem 0;font-family:var(--serif);font-size:1.05rem;font-weight:400;
+  color:var(--ink);outline:none;transition:border-color .3s;appearance:none;
+}
+.ff input:focus,.ff select:focus{border-bottom-color:var(--rose)}
+.ff input::placeholder{color:var(--ink3)}
+.ff select option{background:var(--paper);color:var(--ink)}
+.f2col{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem}
+.form-note{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--ink3);margin:1.8rem 0 1.4rem;line-height:1.65}
+.fbot{display:flex;align-items:center;gap:2rem}
+.fbtn{
+  font-family:var(--sans);font-size:.65rem;font-weight:300;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--paper);background:var(--ink);
+  border:none;padding:.85rem 2.2rem;border-radius:100px;
+  cursor:pointer;transition:background .35s;
+}
+.fbtn:hover{background:var(--rose-dk)}
+.fhint{font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.12em;color:var(--ink3)}
+
+/* ─── FOOTER ─── */
+footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.8rem 3.5rem;border-top:1px solid var(--line);background:var(--paper);
+}
+.f-left{display:flex;align-items:center;gap:2rem}
+.f-brand{font-family:var(--sans);font-size:.62rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--ink3)}
+.f-copy{font-family:var(--sans);font-size:.6rem;font-weight:300;letter-spacing:.1em;color:var(--ink3)}
+.f-links{display:flex;gap:2rem}
+.f-links a{font-family:var(--sans);font-size:.6rem;font-weight:300;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);text-decoration:none;transition:color .3s}
+.f-links a:hover{color:var(--rose)}
+
+/* ─── DRAWER ─── */
+.drawer{
+  position:fixed;inset:0;z-index:700;
+  background:var(--paper);
+  display:flex;flex-direction:column;
+  justify-content:center;
+  padding:0 2rem 0 3rem;
+  gap:0;
+  transform:translateX(100%);
+  transition:transform .55s var(--ease);
+}
+.drawer.open{transform:none}
+.drawer-x{
+  position:absolute;top:1.8rem;right:2rem;
+  background:none;border:none;cursor:pointer;
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink3);
+  transition:color .25s;
+}
+.drawer-x:hover{color:var(--ink)}
+.drawer-x svg{width:14px;height:14px}
+.drawer-nav-label{
+  font-family:var(--sans);font-size:.56rem;font-weight:300;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:2.5rem;
+}
+.drawer a{
+  font-family:'DM Sans','Jost',system-ui,sans-serif;
+  font-size:clamp(1.8rem,6vw,2.4rem);
+  font-weight:300;
+  color:var(--ink);text-decoration:none;
+  letter-spacing:-.01em;
+  line-height:1;
+  padding:.55rem 0;
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  opacity:.55;
+  transition:opacity .25s,color .25s;
+}
+.drawer a:first-of-type{border-top:1px solid var(--line)}
+.drawer a::after{content:'→';font-size:1rem;color:var(--rose-lt);opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .25s var(--ease)}
+.drawer a:hover{opacity:1;color:var(--ink)}
+.drawer a:hover::after{opacity:1;transform:none}
+.drawer-footer{
+  position:absolute;bottom:2rem;left:3rem;right:2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.drawer-footer-brand{
+  font-family:var(--sans);font-size:.6rem;font-weight:300;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--ink3);
+}
+.drawer-footer-links{display:flex;gap:1.5rem}
+.drawer-footer-links a{
+  font-family:var(--sans);font-size:.54rem;font-weight:300;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink3);text-decoration:none;
+  border:none;padding:0;opacity:1;
+  transition:color .25s;
+}
+.drawer-footer-links a:first-of-type{border-top:none}
+.drawer-footer-links a::after{display:none}
+.drawer-footer-links a:hover{color:var(--rose);opacity:1}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fu{to{opacity:1;transform:none}}
+@keyframes fi{to{opacity:1}}
+@keyframes pulse-line{0%,100%{opacity:.3}50%{opacity:.9}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+
+/* ═══════════════════════════════
+   MOBILE
+═══════════════════════════════ */
+@media(max-width:860px){
+
+  /* nav */
+  nav{grid-template-columns:1fr auto;padding:1.3rem 1.5rem}
+  nav.solid{padding:.9rem 1.5rem}
+  .nav-city,.nav-links{display:none}
+  .burger{display:flex}
+
+  /* hero */
+  .hero-center{padding:0 1.5rem 0}
+  .hero-h1{font-size:clamp(2.6rem,9vw,4rem);max-width:100%}
+  .hero-bar{padding:1.2rem 1.5rem;flex-wrap:wrap;gap:1rem}
+  .hero-bar-stats{gap:1.8rem}
+  .hstat strong{font-size:1.3rem}
+  .hero-photo,.hero-tags{display:none}
+
+  /* sections */
+  .sec{padding:4rem 1.5rem}
+
+  /* about */
+  .about-grid{grid-template-columns:1fr;gap:0}
+  .about-l{padding:0 0 2.5rem 0;border-right:none;border-bottom:1px solid var(--line)}
+  .about-r{padding:2.5rem 0 0 0}
+  .about-img{aspect-ratio:4/3}
+  .about-quote{font-size:clamp(1.5rem,5vw,2rem)}
+  .about-p{font-size:1.05rem}
+
+  /* strips */
+  .strip-head{
+    padding:1.6rem 1.5rem;
+    grid-template-columns:3rem 1fr 2rem;
+    gap:1rem;
+  }
+  .strip-n{font-size:1.3rem}
+  .strip-title{font-size:1.2rem}
+  .strip-sub{font-size:.6rem}
+  .strip-body-inner{
+    padding:0 1.5rem 2rem 1.5rem;
+    font-size:1rem;
+  }
+
+  /* approach */
+  .approach-intro{font-size:clamp(1.5rem,6vw,2rem)}
+  .astep{grid-template-columns:3rem 1fr;gap:1.2rem;padding:2rem 0}
+  .astep-n{font-size:1.5rem}
+  .astep h3{font-size:1.1rem}
+  .astep p{font-size:1rem}
+
+  /* format */
+  .format-cols{grid-template-columns:1fr}
+  .fcard:first-child{border-right:none;padding-right:3rem;border-bottom:1px solid var(--line);padding-bottom:3rem}
+  .fcard:last-child{padding-left:3rem;padding-top:3rem}
+  .fcard h3{font-size:1.6rem}
+  .fcard p{font-size:1rem}
+
+  /* testimonial */
+  .testi-wrap{padding:4.5rem 1.5rem}
+  .testi-text{font-size:clamp(1.2rem,5vw,1.6rem)}
+
+  /* contact */
+  .contact-cols{grid-template-columns:1fr}
+  .contact-l{padding:0 0 2.5rem 0;border-right:none;border-bottom:1px solid var(--line)}
+  .contact-r{padding:2.5rem 0 0 0}
+  .contact-h{font-size:clamp(1.8rem,7vw,2.8rem)}
+  .contact-desc{font-size:1rem}
+  .f2col{grid-template-columns:1fr}
+  .chan-label{font-size:.62rem}
+
+  /* footer */
+  footer{flex-direction:column;gap:.8rem;padding:1.5rem 1.5rem;text-align:center}
+  .f-left{flex-direction:column;gap:.4rem}
+  .f-links{justify-content:center}
+}
+
+@media(max-width:480px){
+  .hero-h1{font-size:clamp(2.2rem,10vw,3.2rem)}
+  .hero-bar-stats{gap:1.2rem}
+  .hstat p{font-size:.58rem}
+  .strip-title{font-size:1.1rem}
+  .about-quote{font-size:clamp(1.35rem,5.5vw,1.75rem)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-left">
+    <span class="nav-city">Санкт-Петербург / Ru</span>
+    <span class="nav-clock" id="clock">--:-- MSK</span>
+  </div>
+  <a class="nav-logo" href="#">Soul Voice</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">Об Арине</a></li>
+      <li><a href="#approach">Занятия</a></li>
+      <li><a href="#format">Форматы</a></li>
+      <li><a href="#contact">Связаться</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- DRAWER -->
+<div class="drawer" id="drawer">
+  <button class="drawer-x" id="drawerX" aria-label="Закрыть">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <p class="drawer-nav-label">Меню</p>
+  <a href="#about" onclick="cd()">Об Арине</a>
+  <a href="#approach" onclick="cd()">Занятия</a>
+  <a href="#format" onclick="cd()">Форматы</a>
+  <a href="#contact" onclick="cd()">Связаться</a>
+  <div class="drawer-footer">
+    <span class="drawer-footer-brand">Soul Voice</span>
+    <div class="drawer-footer-links">
+      <a href="https://instagram.com/arina_tupikova" target="_blank">Instagram</a>
+      <a href="https://t.me/ArinaSoulVoice" target="_blank">Telegram</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-tags">
+    <span>Вокал</span>
+    <span>Арина Тупикова</span>
+    <span>Soul Voice</span>
+  </div>
+  <div class="hero-photo">
+    <div class="ph">
+      <div class="ph-base"></div><div class="ph-light"></div>
+      <div class="ph-grain"></div><div class="ph-fade"></div>
+      <span class="ph-label">Фото Арины</span>
+    </div>
+  </div>
+  <div class="hero-center">
+    <h1 class="hero-h1">Голос не ставят.<br>Его <em>отпускают.</em></h1>
+  </div>
+  <div class="hero-bar">
+    <div class="hero-bar-stats">
+      <div class="hstat"><p>Формат</p><strong>1 : 1</strong></div>
+      <div class="hstat"><p>Длительность</p><strong>1.5 ч</strong></div>
+      <div class="hstat"><p>География</p><strong>СПб +</strong></div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-txt">scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>Арина Тупикова</span><span>Вокал</span><span>Санкт-Петербург</span>
+    <span>Soul Voice</span><span>Онлайн</span><span>Офлайн</span>
+    <span>Индивидуально</span><span>Раскрыть голос</span>
+    <span>Арина Тупикова</span><span>Вокал</span><span>Санкт-Петербург</span>
+    <span>Soul Voice</span><span>Онлайн</span><span>Офлайн</span>
+    <span>Индивидуально</span><span>Раскрыть голос</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="about-grid rv">
+    <div class="about-l">
+      <div class="lbl">Об Арине</div>
+      <blockquote class="about-quote">
+        Я не исправляю голос.<br>Я помогаю его <em>услышать.</em>
+      </blockquote>
+      <p class="about-p">Меня зовут Арина. Я преподаватель вокала и музыкант. Для меня занятие — не урок с упражнениями, а живой разговор. С голосом. С собой.</p>
+      <p class="about-p">Работаю с теми, кто хочет петь «просто для себя», с теми, у кого есть творческий путь — и со всеми, кто чувствует, что голос ещё не сказал главного.</p>
+      <p class="about-p">Каждый ученик приходит со своей историей, своими зажимами, своим тембром. Я не подгоняю под стандарт. Я слушаю.</p>
+    </div>
+    <div class="about-r">
+      <div class="about-img">
+        <div class="aph">
+          <div class="aph-base"></div><div class="aph-light"></div>
+          <div class="aph-grain"></div><div class="aph-lines"></div>
+          <div class="aph-fade"></div>
+          <span class="aph-label">Портретное фото</span>
+        </div>
+      </div>
+      <div class="about-meta">
+        <div class="meta-item"><p>Формат</p><strong>1 : 1</strong></div>
+        <div class="meta-item"><p>Длительность</p><strong>1.5 ч</strong></div>
+        <div class="meta-item"><p>Занятия</p><strong>Онлайн +</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIPS — accordion -->
+<div class="strips">
+  <div class="strip" id="s1">
+    <div class="strip-head" onclick="toggleStrip('s1')">
+      <span class="strip-n">01</span>
+      <div>
+        <div class="strip-title">Безопасное пространство</div>
+        <div class="strip-sub">Никакой критики ради критики</div>
+      </div>
+      <div class="strip-icon">+</div>
+    </div>
+    <div class="strip-body">
+      <div class="strip-body-inner">
+        Занятия — это не экзамен и не прослушивание. Здесь нет правильного и неправильного способа петь. Есть только твой голос и пространство, в котором он может раскрыться без страха и осуждения.
+      </div>
+    </div>
+  </div>
+
+  <div class="strip" id="s2">
+    <div class="strip-head" onclick="toggleStrip('s2')">
+      <span class="strip-n">02</span>
+      <div>
+        <div class="strip-title">Без шаблонов</div>
+        <div class="strip-sub">Твой жанр, твои цели, твоё настроение сегодня</div>
+      </div>
+      <div class="strip-icon">+</div>
+    </div>
+    <div class="strip-body">
+      <div class="strip-body-inner">
+        Каждое занятие строится под тебя — в день икс. Работаем с песнями, которые тебе близки, в темпе который тебе подходит. Никаких скучных упражнений ради упражнений — только то, что помогает твоему голосу открываться.
+      </div>
+    </div>
+  </div>
+
+  <div class="strip" id="s3">
+    <div class="strip-head" onclick="toggleStrip('s3')">
+      <span class="strip-n">03</span>
+      <div>
+        <div class="strip-title">Голос как личность</div>
+        <div class="strip-sub">Тембр и особенности — это не недостатки. Это ты.</div>
+      </div>
+      <div class="strip-icon">+</div>
+    </div>
+    <div class="strip-body">
+      <div class="strip-body-inner">
+        Я не пытаюсь сделать из тебя кого-то другого. Твой тембр, твои особенности, то, что ты считаешь «недостатками» — это и есть твой голос. Моя задача — помочь ему зазвучать так, чтобы ты сам себя узнал.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<section class="sec sec--dark" id="approach">
+  <div class="approach-inner">
+    <div class="lbl lbl-lt">Как устроены занятия</div>
+    <p class="approach-intro rv">Каждая встреча —<br><em>маленький путь</em> к себе</p>
+    <div class="asteps">
+      <div class="astep">
+        <span class="astep-n">01</span>
+        <div>
+          <h3>Первый разговор</h3>
+          <p>Знакомимся. Ты рассказываешь, что хочешь — или просто приходишь послушать, что вообще возможно. Никакого прослушивания, никакого давления.</p>
+        </div>
+      </div>
+      <div class="astep" style="transition-delay:.14s">
+        <span class="astep-n">02</span>
+        <div>
+          <h3>Твой маршрут</h3>
+          <p>Вместе определяем направление. Работаем через песни, которые тебе близки — не через скучные упражнения. Голос открывается через то, что резонирует.</p>
+        </div>
+      </div>
+      <div class="astep" style="transition-delay:.28s">
+        <span class="astep-n">03</span>
+        <div>
+          <h3>Момент, когда всё меняется</h3>
+          <p>У каждого он свой. Иногда на третьем занятии, иногда позже. Но он всегда есть — и я рядом, когда это происходит.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="sec sec--alt" id="format">
+  <div class="lbl">Форматы</div>
+  <div class="format-cols">
+    <div class="fcard">
+      <div class="fcard-grain"><div class="fcard-grain-glow"></div><div class="fcard-grain-tex"></div></div>
+      <span class="ftag">— Онлайн</span>
+      <h3>Занятия в Zoom</h3>
+      <p>Из любой точки мира. Всё что нужно — хорошие наушники и желание. Онлайн-формат ничуть не менее живой, чем студия.</p>
+      <ul class="flist">
+        <li>Длительность — 1.5 часа</li>
+        <li>Гибкое расписание</li>
+        <li>Запись занятия по запросу</li>
+        <li>Связь между встречами</li>
+      </ul>
+    </div>
+    <div class="fcard" style="transition-delay:.12s">
+      <div class="fcard-grain"><div class="fcard-grain-glow"></div><div class="fcard-grain-tex"></div></div>
+      <span class="ftag">— Офлайн</span>
+      <h3>Студия в Петербурге</h3>
+      <p>Встречаемся вживую. Атмосфера, живой звук, настоящий контакт — для тех, кто чувствует разницу.</p>
+      <ul class="flist">
+        <li>Длительность — 1.5 часа</li>
+        <li>Санкт-Петербург</li>
+        <li>Студийное оборудование</li>
+        <li>Возможность записи</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<div class="testi-wrap" id="reviews">
+  <div class="testi-grain"></div>
+  <div class="testi-glow"></div>
+  <div class="testi-inner">
+    <div class="testi-wave">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <p class="testi-lbl">Отзывы учеников</p>
+    <p class="testi-text">Скоро здесь появятся настоящие истории —<br>от тех, кто нашёл свой голос.</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="contact-cols rv">
+    <div class="contact-glow-bg"></div>
+    <div class="contact-grain-tex"></div>
+    <div class="contact-l">
+      <div>
+        <div class="lbl">Связаться</div>
+        <h2 class="contact-h">Готова<br>начать<br><em>разговор?</em></h2>
+        <p class="contact-desc">Напиши мне — и мы найдём время для знакомства. Первый шаг проще, чем кажется.</p>
+      </div>
+      <div class="channels">
+        <a class="chan" href="https://t.me/ArinaSoulVoice" target="_blank">
+          <div class="chan-dot">
+            <!-- Telegram official logo -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.16 13.67l-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.99.889z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="chan-label">Telegram — @ArinaSoulVoice</span>
+        </a>
+        <a class="chan" href="https://instagram.com/arina_tupikova" target="_blank">
+          <div class="chan-dot">
+            <!-- Instagram official logo -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="chan-label">Instagram — @arina_tupikova</span>
+        </a>
+        <a class="chan" href="mailto:hello@soulvoice.ru">
+          <div class="chan-dot">
+            <!-- Email icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="chan-label">hello@soulvoice.ru</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-r">
+      <form id="frm" onsubmit="send(event)">
+        <div class="f2col">
+          <div class="ff"><label>Имя</label><input type="text" placeholder="Как тебя зовут?" required></div>
+          <div class="ff"><label>Telegram / Телефон</label><input type="text" placeholder="Как с тобой связаться?"></div>
+        </div>
+        <div class="ff">
+          <label>Формат занятий</label>
+          <select>
+            <option value="">— Выбери формат</option>
+            <option>Онлайн</option>
+            <option>Офлайн (Санкт-Петербург)</option>
+            <option>Ещё не решила</option>
+          </select>
+        </div>
+        <p class="form-note">Остальное расскажешь в разговоре —<br>я не люблю длинные анкеты.</p>
+        <div class="fbot">
+          <button class="fbtn" id="fbtn" type="submit">Написать →</button>
+          <span class="fhint" id="fhint">Арина ответит в течение дня</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-left">
+    <span class="f-brand">Soul Voice</span>
+    <span class="f-copy">Арина Тупикова · Санкт-Петербург · 2026</span>
+  </div>
+  <div class="f-links">
+    <a href="https://instagram.com/arina_tupikova" target="_blank">Instagram</a>
+    <a href="https://t.me/ArinaSoulVoice" target="_blank">Telegram</a>
+  </div>
+</footer>
+
+<script>
+// Clock MSK
+function tick(){
+  const t=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Moscow'}));
+  const el=document.getElementById('clock');
+  if(el)el.textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+':'+String(t.getSeconds()).padStart(2,'0')+' MSK';
+}
+tick();setInterval(tick,1000);
+
+// Nav
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>70),{passive:true});
+
+// Burger
+document.getElementById('burger').onclick=()=>document.getElementById('drawer').classList.add('open');
+document.getElementById('drawerX').onclick=cd;
+function cd(){document.getElementById('drawer').classList.remove('open')}
+
+// Reveal
+const io=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')});
+},{threshold:.1});
+document.querySelectorAll('.rv,.astep,.fcard,.testi-inner').forEach(el=>io.observe(el));
+
+// Accordion strips
+function toggleStrip(id){
+  const strip=document.getElementById(id);
+  const wasOpen=strip.classList.contains('open');
+  // close all
+  document.querySelectorAll('.strip').forEach(s=>s.classList.remove('open'));
+  // open clicked if it was closed
+  if(!wasOpen)strip.classList.add('open');
+}
+
+// Form
+function send(e){
+  e.preventDefault();
+  const b=document.getElementById('fbtn'),h=document.getElementById('fhint');
+  b.textContent='Отправлено ✓';b.style.background='var(--rose-dk)';b.disabled=true;
+  h.textContent='Арина скоро напишет ♡';
+}
+</script>
+</body>
+</html>
