@@ -709,7 +709,7 @@ footer{
   .nav-r a,.nav-time{display:none}
   .burger{display:flex}
 
-  /* hero — на мобиле фото сверху, текст снизу */
+  /* hero — фото сверху, текст снизу на белом */
   .hero{
     flex-direction:column;
     justify-content:flex-start;
@@ -719,9 +719,9 @@ footer{
     position:relative;
     right:auto;top:auto;bottom:auto;
     width:100%;
-    height:60vw;
-    min-height:260px;
-    max-height:420px;
+    height:80vw;
+    min-height:320px;
+    max-height:520px;
     display:block;
     flex-shrink:0;
   }
@@ -729,13 +729,19 @@ footer{
   .hero-text{
     position:relative;
     z-index:3;
-    padding:1.5rem 1.5rem 0;
-    margin-top:-3rem; /* текст заходит поверх нижнего края фото */
+    padding:2rem 1.5rem 0;
+    margin-top:0;
+    background:#fff;
+  }
+  /* intro текст — тёмный, чёткий на белом фоне */
+  .hero-intro{
+    color:var(--i3) !important;
+    margin-bottom:1.2rem;
   }
   .hero-h{font-size:clamp(2.4rem,9vw,3.8rem);max-width:100%}
   .hero-h em{padding-left:clamp(1.2rem,5vw,3rem)}
   .hero-sub{margin-left:clamp(1.2rem,5vw,3rem);font-size:.9rem;max-width:100%}
-  .hero-foot{padding:1.5rem 1.5rem;flex-wrap:wrap;gap:1rem}
+  .hero-foot{padding:1.5rem 1.5rem;flex-wrap:wrap;gap:1rem;background:#fff}
   .hero-foot-meta{gap:1.8rem}
   .hm strong{font-size:1.2rem}
 
@@ -780,7 +786,7 @@ footer{
 }
 
 @media(max-width:480px){
-  .hero-img{height:72vw}
+  .hero-img{height:90vw;min-height:280px}
   .hero-h{font-size:clamp(2rem,10vw,3rem)}
   .hero-h em{padding-left:1rem}
   .hero-sub{margin-left:1rem;max-width:100%}
